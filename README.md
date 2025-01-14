@@ -45,9 +45,9 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Clone the repository to your local machine using the following command:
 
-  ```bash
+```bash
    https://github.com/2164-ServiceNow/sumasree-haritha-Movie-Information-Hub
-  ```
+```
 
 #### 4. Navigate to the Project Directory
 
