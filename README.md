@@ -25,13 +25,13 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 ### Development Environment Setup:
 
-1. Install Node.js
+#### 1. Install Node.js
 
 - Download and install Node.js from https://nodejs.org/.
 
 - Use the latest LTS (Long Term Support) version for better stability and compatibility with most projects.
 
-2. Install Angular CLI
+#### 2. Install Angular CLI
 
 - Open your terminal or command prompt and run:
 
@@ -39,19 +39,19 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - This installs the Angular CLI globally, allowing you to use Angular commands anywhere on your system.
 
-3. Clone the Repository
+#### 3. Clone the Repository
 
 - Clone the repository to your local machine using the following command:
 
   - https://github.com/2164-ServiceNow/sumasree-haritha-Movie-Information-Hub
 
-4.  Navigate to the Project Directory
+#### 4. Navigate to the Project Directory
 
 - Move into the project folder using:
 
   - cd sumasree-haritha-Movie-Information-Hub
 
-5. Install Project Dependencies
+#### 5. Install Project Dependencies
 
 - Install all the required dependencies by running:
 
@@ -59,7 +59,7 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - This will download and set up all the dependencies listed in the package.json file.
 
-6. Run the Development Server
+#### 6. Run the Development Server
 
 - Start the Angular development server using the following command:
 
