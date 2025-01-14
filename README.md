@@ -35,9 +35,9 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Open your terminal or command prompt and run:
 
-  ```bash
-     npm install -g @angular/cli
-  ```
+```bash
+    npm install -g @angular/cli
+```
 
 - This installs the Angular CLI globally, allowing you to use Angular commands anywhere on your system.
 
