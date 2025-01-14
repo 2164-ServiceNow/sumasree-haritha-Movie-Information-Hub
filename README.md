@@ -35,7 +35,9 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Open your terminal or command prompt and run:
 
-  - npm install -g @angular/cli
+  ```bash
+     npm install -g @angular/cli
+  ```
 
 - This installs the Angular CLI globally, allowing you to use Angular commands anywhere on your system.
 
@@ -43,19 +45,25 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Clone the repository to your local machine using the following command:
 
-  - https://github.com/2164-ServiceNow/sumasree-haritha-Movie-Information-Hub
+  ```bash
+   https://github.com/2164-ServiceNow/sumasree-haritha-Movie-Information-Hub
+  ```
 
 #### 4. Navigate to the Project Directory
 
 - Move into the project folder using:
 
-  - cd sumasree-haritha-Movie-Information-Hub
+```bash
+   cd sumasree-haritha-Movie-Information-Hub
+```
 
 #### 5. Install Project Dependencies
 
 - Install all the required dependencies by running:
 
-  - npm install
+```bash
+   npm install
+```
 
 - This will download and set up all the dependencies listed in the package.json file.
 
@@ -63,7 +71,9 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Start the Angular development server using the following command:
 
-  - ng serve
+```bash
+  ng serve
+```
 
 - By default, the application will be available at http://localhost:4200/. Open this link in your browser to view your application.
 
