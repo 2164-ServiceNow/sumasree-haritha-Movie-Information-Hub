@@ -3,23 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie's World</title>
-    <!-- Include AngularJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <title>Watchlist App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
-
-    <!-- Default CSS (Optional) -->
-    <link rel="stylesheet" href="./components/home/home.css" />
-
-    <link rel="stylesheet" href="./components/signUp/signUp.css" />
-
-    <!-- Dynamic CSS based on controller -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js"></script>
   </head>
-  <body>
-    <!-- View placeholder -->
-    <ng-view></ng-view>
+  <body ng-controller="MainController">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-left">
+        <a href="" class="navbar-item" ng-click="loadAllMovies()">Home</a>
+        <a href="#" class="navbar-item">Watchlist</a>
+        <!-- Search Section -->
+        <div class="navbar-item search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search movies..."
+            ng-model="searchValue"
+          />
+          <button class="search-btn" ng-click="search()">🔍</button>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <a class="btn-signin" href="/signup" style="text-decoration: none"
+          >Sign In</a
+        >
+      </div>
+    </nav>
 
-    <!-- AngularJS app -->
+    <!-- Content Section -->
+    <div class="content">
+      <div class="movie-grid">
+        <div class="movie-card" ng-repeat="movie in movies">
+          <img
+            ng-src="{{movie.Poster}}"
+            alt="{{movie.title}}"
+            class="movie-poster"
+          />
+          <h3 class="movie-title">{{movie.Title}}</h3>
+        </div>
+      </div>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>
