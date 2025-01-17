@@ -1,0 +1,47 @@
+body{
+    background: url("/sumasree-haritha-Movie-Information-Hub/Assets/movie-background-collage.jpg") no-repeat center center fixed; 
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.movie-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+}
+.movie-title{
+    color: aliceblue;
+}
+
+.movie-card p {
+    color: #666;
+    font-size: 14px;
+}
+h1{
+    color:aliceblue;
+    text-align: center;
+}
