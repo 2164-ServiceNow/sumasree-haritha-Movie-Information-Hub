@@ -81,3 +81,38 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - Haritha Yerukondu - [haritha75](https://github.com/haritha75)
 - SumaSree Guruvu - [SumaGuruvu](https://github.com/SumaGuruvu)
+
+"I chose to work with a movie API because I hadn't worked on a movie-related application before, and I wanted to challenge myself with something new. Additionally, I have always been interested in movies, which made the project both exciting and engaging for me."
+
+s the Model-View-Controller (MVC) design pattern, which helps organize the code and makes it maintainable and scalable.
+Modules
+
+    Modules are containers for the different parts of an AngularJS application (controllers, services, directives, etc.).
+    A module is created using the angular.module() method.
+
+Controllers
+
+    Controllers are responsible for managing the data and logic of the application. They act as the bridge between the View (HTML) and the Model (data).
+
+Views (HTML)
+
+    Views are the HTML templates that display the data and user interface.
+
+app/
+├── index.html // Entry point of the application
+├── app.js // Main module definition and configuration
+├── controllers/
+│ └── MyController.js
+├── services/
+│ └── MyService.js
+├── views/
+│ ├── home.html
+│ ├── about.html
+├── directives/
+│ └── MyDirective.js
+├── filters/
+│ └── MyFilter.js
+├── css/
+│ └── styles.css
+├── js/
+│ └── scripts.js

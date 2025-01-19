@@ -1,38 +1,33 @@
 "use strict";
+
 let app = angular.module("movieApp", []);
-
-// app.config(function ($routeProvider) {
-//   $routeProvider
-//     .when("/signup", {
-//       templateUrl: "pages/signUp.html", // Your signup page template
-//       controller: "SignupController", // You can define a controller if needed
-//     })
-
-// });
 
 app.controller("MainController", function ($scope, $http) {
   $scope.movies = [];
+  $scope.watchlist = [];
+  $scope.searchValue = "";
+  $scope.showingWatchlist = false;
+  $scope.selectedMovie = null;
   const apiKey = "9c6f32a";
 
-  // Function to fetch all movies initially
   $scope.getMovies = function () {
+    $scope.movies = [];
     const searchQueries = [
       "Batman",
       "Superman",
       "Thor",
       "Cricket",
-      "animal",
-      "ghost",
-      "remo",
+      "Animal",
+      "Ghost",
+      "Remo",
     ];
+
     searchQueries.forEach((query) => {
       $http
         .get(`https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`)
         .then(function (response) {
           if (response.data && response.data.Search) {
             $scope.movies = $scope.movies.concat(response.data.Search);
-          } else {
-            console.error(`No movies found for query: ${query}`);
           }
         })
         .catch(function (error) {
@@ -41,40 +36,67 @@ app.controller("MainController", function ($scope, $http) {
     });
   };
 
-  // Function to search movies based on user input
   $scope.search = function () {
-    if ($scope.searchValue) {
+    if ($scope.searchValue.trim() !== "") {
       $http
         .get(
           `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
         )
         .then(function (response) {
           if (response.data && response.data.Search) {
-            $scope.movies = response.data.Search; // Update the movies list to show only search results
+            $scope.movies = response.data.Search;
+            $scope.showingWatchlist = false;
           } else {
             $scope.movies = [];
-            console.error(
-              "No movies found for search term:",
-              $scope.searchValue
-            );
-            alert("No movies found for search term");
+            alert("No movies found for search term.");
           }
         })
         .catch(function (error) {
-          console.error("Error fetching movies from OMDB:", error);
+          console.error("Error searching movies:", error);
         });
     } else {
-      // If the search input is empty, show all movies
       $scope.getMovies();
     }
   };
 
-  // Function to load all movies when the Home link is clicked
   $scope.loadAllMovies = function () {
-    $scope.searchValue = ""; // Clear search input
-    $scope.getMovies(); // Fetch all movies
+    $scope.searchValue = "";
+    $scope.getMovies();
+    $scope.showingWatchlist = false;
   };
 
-  // Initialize the movie list when the page loads
+  $scope.addToWatchlist = function (movie) {
+    if (!$scope.watchlist.includes(movie)) {
+      $scope.watchlist.push(movie);
+      alert(`${movie.Title} added to watchlist.`);
+    } else {
+      alert(`${movie.Title} is already in your watchlist.`);
+    }
+  };
+
+  $scope.removeFromWatchlist = function (movie) {
+    const index = $scope.watchlist.indexOf(movie);
+    if (index > -1) {
+      $scope.watchlist.splice(index, 1);
+      alert(`${movie.Title} removed from watchlist.`);
+    }
+  };
+
+  $scope.isInWatchlist = function (movie) {
+    return $scope.watchlist.includes(movie);
+  };
+
+  $scope.showWatchlist = function () {
+    $scope.showingWatchlist = true;
+  };
+
+  $scope.viewDetails = function (movie) {
+    $scope.selectedMovie = movie;
+  };
+
+  $scope.closeDetails = function () {
+    $scope.selectedMovie = null;
+  };
+
   $scope.getMovies();
 });

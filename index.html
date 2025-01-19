@@ -6,16 +6,13 @@
     <title>Watchlist App</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js"></script>
   </head>
   <body ng-controller="MainController">
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-left">
         <a href="" class="navbar-item" ng-click="loadAllMovies()">Home</a>
-        <a href="#" class="navbar-item">Watchlist</a>
-        <!-- Search Section -->
+        <a href="" class="navbar-item" ng-click="showWatchlist()">Watchlist</a>
         <div class="navbar-item search-container">
           <input
             type="text"
@@ -27,7 +24,11 @@
         </div>
       </div>
       <div class="navbar-right">
-        <a class="btn-signin" href="/signup" style="text-decoration: none"
+        <a
+          class="btn-signin"
+          ng-click="signup()"
+          ng-href="signup"
+          style="text-decoration: none"
           >Sign In</a
         >
       </div>
@@ -35,18 +36,55 @@
 
     <!-- Content Section -->
     <div class="content">
-      <div class="movie-grid">
-        <div class="movie-card" ng-repeat="movie in movies">
+      <!-- Movie Details -->
+      <div class="movie-details" ng-if="selectedMovie">
+        <button class="close-btn" ng-click="closeDetails()">✖</button>
+        <img ng-src="{{selectedMovie.Poster}}" alt="{{selectedMovie.Title}}" />
+        <h2>{{selectedMovie.Title}}</h2>
+        <p>Year: {{selectedMovie.Year}}</p>
+        <p>Type: {{selectedMovie.Type}}</p>
+        <p>IMDB ID: {{selectedMovie.imdbID}}</p>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div ng-if="loading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Movie Grid -->
+      <div class="movie-grid" ng-if="!selectedMovie">
+        <div
+          class="movie-card"
+          ng-repeat="movie in (showingWatchlist ? watchlist : movies)"
+        >
           <img
             ng-src="{{movie.Poster}}"
-            alt="{{movie.title}}"
+            alt="{{movie.Title}}"
             class="movie-poster"
           />
           <h3 class="movie-title">{{movie.Title}}</h3>
+          <div class="movie-buttons">
+            <button
+              class="view-btn"
+              ng-click="addToWatchlist(movie)"
+              ng-if="!isInWatchlist(movie) && !showingWatchlist"
+            >
+              Add to Watchlist
+            </button>
+            <button
+              class="remove-btn"
+              ng-click="removeFromWatchlist(movie)"
+              ng-if="isInWatchlist(movie) || showingWatchlist"
+            >
+              Remove from Watchlist
+            </button>
+            <button class="details-btn" ng-click="viewDetails(movie)">
+              Details
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
     <script src="app.js"></script>
   </body>
 </html>
