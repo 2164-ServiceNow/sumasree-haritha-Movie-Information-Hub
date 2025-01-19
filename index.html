@@ -8,15 +8,16 @@
 </head>
 <body ng-controller="MainController">
     <h1>Welcome</h1>
-    <div>
+    <div class="search-container">
         <input
             type="text"
             class="search-input"
             placeholder="Search movies..."
             ng-model="searchValue"
         />
-        <button ng-click="search()">🔍</button>
+        <button ng-click="search()">🔍 Search</button>
     </div>
+    
     <div class="movie-grid">
         <div class="movie-card" ng-repeat="movie in movies">
             <img ng-src="{{ movie.Poster }}" alt="Movie Poster">
