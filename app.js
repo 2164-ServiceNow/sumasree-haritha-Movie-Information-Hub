@@ -1,7 +1,59 @@
 "use strict";
 
 let app = angular.module("movieApp", []);
+app.controller("AuthController", function ($scope, $window) {
+  $scope.isSignUp = true;
 
+  $scope.toggleForm = function () {
+    $scope.isSignUp = !$scope.isSignUp;
+  };
+
+  $scope.submitSignUp = function () {
+    console.log("User registered with:", {
+      username: $scope.username,
+      email: $scope.email,
+      password: $scope.password,
+    });
+
+    // Redirect to login page
+    alert("Sign-up successful! Redirecting to login...");
+    $scope.toggleForm(); // Switch to login form
+  };
+
+  $scope.submitLogin = function () {
+    console.log("User logged in with:", {
+      email: $scope.email,
+      password: $scope.password,
+    });
+
+    // Redirect to the main page (index.html)
+    $window.location.href = "../../index.html";
+  };
+});
+
+app.controller("LoginController", function ($scope, $window) {
+  $scope.submitLogin = function () {
+    console.log("User logged in with:", {
+      email: $scope.email,
+      password: $scope.password,
+    });
+
+    // Redirect to the main page (index.html)
+   $window.location.href = "../../index.html";
+  };
+});
+app.controller("SignUpController", function ($scope, $window) {
+  $scope.submitSignUp = function () {
+    console.log("User registered with:", {
+      username: $scope.username,
+      email: $scope.email,
+      password: $scope.password,
+    });
+
+    // Redirect to login page
+    $window.location.href = "../../components/login/login.html";
+  };
+});
 app.controller("MainController", function ($scope, $http) {
   $scope.movies = [];
   $scope.watchlist = [];
@@ -58,7 +110,15 @@ app.controller("MainController", function ($scope, $http) {
       $scope.getMovies();
     }
   };
-
+  $scope.goToLogin = function () {
+    console.log("Redirecting to login page...");
+    window.location.href = "components/login/login.html";
+  };
+  $scope.goToSignUp = function () {
+    console.log("Redirecting to signup page...");
+    window.location.href = "components/signUp/signUp.html";
+  };
+  
   $scope.loadAllMovies = function () {
     $scope.searchValue = "";
     $scope.getMovies();

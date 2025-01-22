@@ -24,13 +24,9 @@
         </div>
       </div>
       <div class="navbar-right">
-        <a
-          class="btn-signin"
-          ng-click="signup()"
-          ng-href="signup"
-          style="text-decoration: none"
-          >Sign In</a
-        >
+        <button ng-click="goToSignUp()" class="btn-signin">Sign Up</button>
+
+        <button ng-click="goToLogin()" class="btn-signin">Log In</button>
       </div>
     </nav>
 
@@ -85,6 +81,9 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="app.js"></script>
+    <script src="components/signUp/signUp.js"></script>
+    <script src="components/login/login.js"></script>
   </body>
 </html>
