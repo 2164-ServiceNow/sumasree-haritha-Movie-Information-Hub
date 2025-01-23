@@ -39,7 +39,7 @@ app.controller("LoginController", function ($scope, $window) {
     });
 
     // Redirect to the main page (index.html)
-   $window.location.href = "../../index.html";
+    $window.location.href = "../../index.html";
   };
 });
 app.controller("SignUpController", function ($scope, $window) {
@@ -61,6 +61,7 @@ app.controller("MainController", function ($scope, $http) {
   $scope.showingWatchlist = false;
   $scope.selectedMovie = null;
   const apiKey = "9c6f32a";
+  $scope.filteredMovies = [];
 
   $scope.getMovies = function () {
     $scope.movies = [];
@@ -80,6 +81,7 @@ app.controller("MainController", function ($scope, $http) {
         .then(function (response) {
           if (response.data && response.data.Search) {
             $scope.movies = $scope.movies.concat(response.data.Search);
+            $scope.filteredMovies = $scope.movies;
           }
         })
         .catch(function (error) {
@@ -88,28 +90,65 @@ app.controller("MainController", function ($scope, $http) {
     });
   };
 
+  // $scope.search = function () {
+  //   if ($scope.searchValue.trim() !== "") {
+  //     $http
+  //       .get(
+  //         `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
+  //       )
+  //       .then(function (response) {
+  //         if (response.data && response.data.Search) {
+  //           $scope.movies = response.data.Search;
+  //           $scope.showingWatchlist = false;
+  //         } else {
+  //           $scope.movies = [];
+  //           alert("No movies found for search term.");
+  //         }
+  //       })
+  //       .catch(function (error) {
+  //         console.error("Error searching movies:", error);
+  //       });
+  //   } else {
+  //     $scope.getMovies();
+  //   }
+  // };
+
   $scope.search = function () {
     if ($scope.searchValue.trim() !== "") {
-      $http
-        .get(
-          `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
-        )
-        .then(function (response) {
-          if (response.data && response.data.Search) {
-            $scope.movies = response.data.Search;
-            $scope.showingWatchlist = false;
-          } else {
-            $scope.movies = [];
-            alert("No movies found for search term.");
-          }
-        })
-        .catch(function (error) {
-          console.error("Error searching movies:", error);
-        });
+      if (!isNaN($scope.searchValue)) {
+        // Input is a year, filter movies locally
+        const year = $scope.searchValue;
+        $scope.filteredMovies = $scope.movies.filter(
+          (movie) => movie.Year === year
+        );
+
+        if ($scope.filteredMovies.length === 0) {
+          alert("No movies found for the entered year.");
+        }
+      } else {
+        // Input is a name, fetch movies from API
+        $http
+          .get(
+            `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
+          )
+          .then(function (response) {
+            if (response.data && response.data.Search) {
+              $scope.movies = response.data.Search;
+              $scope.filteredMovies = $scope.movies; // Update displayed movies
+            } else {
+              $scope.movies = [];
+              alert("No movies found for the search term.");
+            }
+          })
+          .catch(function (error) {
+            console.error("Error searching movies:", error);
+          });
+      }
     } else {
-      $scope.getMovies();
+      alert("Please enter a search term!");
     }
   };
+
   $scope.goToLogin = function () {
     console.log("Redirecting to login page...");
     window.location.href = "components/login/login.html";
@@ -118,7 +157,7 @@ app.controller("MainController", function ($scope, $http) {
     console.log("Redirecting to signup page...");
     window.location.href = "components/signUp/signUp.html";
   };
-  
+
   $scope.loadAllMovies = function () {
     $scope.searchValue = "";
     $scope.getMovies();

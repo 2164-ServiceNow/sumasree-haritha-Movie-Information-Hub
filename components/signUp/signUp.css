@@ -137,6 +137,7 @@ input {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 2%;
 }
 
 #auth-btn:hover {
