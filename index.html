@@ -32,6 +32,21 @@
 
     <!-- Content Section -->
     <div class="content">
+      <!-- Error Message -->
+      <div ng-if="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+      <!-- watchlist Message -->
+
+      <div
+        class="empty-watchlist-message"
+        ng-if="showingWatchlist && watchlist.length === 0"
+      >
+        <p>
+          Your watchlist is currently empty. Add some movies to get started!
+        </p>
+      </div>
+
       <!-- Movie Details -->
       <div class="movie-details" ng-if="selectedMovie">
         <button class="close-btn" ng-click="closeDetails()">✖</button>

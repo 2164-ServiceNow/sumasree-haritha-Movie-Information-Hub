@@ -1,6 +1,26 @@
 "use strict";
 
 let app = angular.module("movieApp", []);
+// 1
+// app.config(function ($routeProvider) {
+//   $routeProvider
+//     .when("/login", {
+//       templateUrl: "components/login/login.html",
+//       controller: "LoginController",
+//     })
+//     .when("/signup", {
+//       templateUrl: "components/signUp/signUp.html",
+//       controller: "SignUpController",
+//     })
+//     .when("/movies", {
+//       templateUrl: "./index.html", // Path to your main movie page
+//       controller: "MainController",
+//     })
+//     .otherwise({
+//       redirectTo: "/movies", // Default route
+//     });
+// });
+
 app.controller("AuthController", function ($scope, $window) {
   $scope.isSignUp = true;
 
@@ -28,6 +48,7 @@ app.controller("AuthController", function ($scope, $window) {
 
     // Redirect to the main page (index.html)
     $window.location.href = "../../index.html";
+    // $window.location.href = "#/movies"; // Redirect using route
   };
 });
 
@@ -40,6 +61,7 @@ app.controller("LoginController", function ($scope, $window) {
 
     // Redirect to the main page (index.html)
     $window.location.href = "../../index.html";
+    // $window.location.href = "#/movies"; // Redirect using route
   };
 });
 app.controller("SignUpController", function ($scope, $window) {
@@ -52,9 +74,10 @@ app.controller("SignUpController", function ($scope, $window) {
 
     // Redirect to login page
     $window.location.href = "../../components/login/login.html";
+    // $window.location.href = "#/login"; // Redirect using route
   };
 });
-app.controller("MainController", function ($scope, $http) {
+app.controller("MainController", function ($scope, $http, $window) {
   $scope.movies = [];
   $scope.watchlist = [];
   $scope.searchValue = "";
@@ -62,6 +85,7 @@ app.controller("MainController", function ($scope, $http) {
   $scope.selectedMovie = null;
   const apiKey = "9c6f32a";
   $scope.filteredMovies = [];
+  $scope.errorMessage = null; // Initialize errorMessage property
 
   $scope.getMovies = function () {
     $scope.movies = [];
@@ -89,7 +113,7 @@ app.controller("MainController", function ($scope, $http) {
         });
     });
   };
-
+  // only name of the movie
   // $scope.search = function () {
   //   if ($scope.searchValue.trim() !== "") {
   //     $http
@@ -112,8 +136,51 @@ app.controller("MainController", function ($scope, $http) {
   //     $scope.getMovies();
   //   }
   // };
+  // year and movie
+  // $scope.search = function () {
+  //   $scope.errorMessage = ""; // Reset error message before each search
+  //   if ($scope.searchValue.trim() !== "") {
+  //     if (!isNaN($scope.searchValue)) {
+  //       // Input is a year, filter movies locally
+  //       const year = $scope.searchValue;
+  //       $scope.filteredMovies = $scope.movies.filter(
+  //         (movie) => movie.Year === year
+  //       );
 
+  //       if ($scope.filteredMovies.length === 0) {
+  //         // alert("No movies found for the entered year.");
+  //         $scope.errorMessage = "No movies found for the entered year.";
+  //         $window.location.href = "../../index.html";
+  //       }
+  //     } else {
+  //       // Input is a name, fetch movies from API
+  //       $http
+  //         .get(
+  //           `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
+  //         )
+  //         .then(function (response) {
+  //           if (response.data && response.data.Search) {
+  //             $scope.movies = response.data.Search;
+  //             $scope.filteredMovies = $scope.movies;
+  //           } else {
+  //             $scope.movies = [];
+  //             // alert("No movies found for the search term.");
+  //             $scope.errorMessage = "No movies found for the search term.";
+  //             $window.location.href = "../../index.html";
+  //           }
+  //         })
+  //         .catch(function (error) {
+  //           console.error("Error searching movies:", error);
+  //         });
+  //     }
+  //   } else {
+  //     alert("Please enter a search term!");
+  //   }
+  // };
+
+  // year ,movie name with error message
   $scope.search = function () {
+    $scope.errorMessage = ""; // Reset error message before each search
     if ($scope.searchValue.trim() !== "") {
       if (!isNaN($scope.searchValue)) {
         // Input is a year, filter movies locally
@@ -123,7 +190,8 @@ app.controller("MainController", function ($scope, $http) {
         );
 
         if ($scope.filteredMovies.length === 0) {
-          alert("No movies found for the entered year.");
+          $scope.errorMessage = "No movies found for the entered year.";
+          // Don't redirect yet, let the error message show up
         }
       } else {
         // Input is a name, fetch movies from API
@@ -134,18 +202,19 @@ app.controller("MainController", function ($scope, $http) {
           .then(function (response) {
             if (response.data && response.data.Search) {
               $scope.movies = response.data.Search;
-              $scope.filteredMovies = $scope.movies; // Update displayed movies
+              $scope.filteredMovies = $scope.movies;
             } else {
               $scope.movies = [];
-              alert("No movies found for the search term.");
+              $scope.errorMessage = "No movies found for the search term.";
             }
           })
           .catch(function (error) {
             console.error("Error searching movies:", error);
+            $scope.errorMessage = "An error occurred while searching.";
           });
       }
     } else {
-      alert("Please enter a search term!");
+      $scope.errorMessage = "Please enter a search term!";
     }
   };
 
