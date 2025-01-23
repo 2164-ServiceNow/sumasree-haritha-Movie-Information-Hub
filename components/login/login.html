@@ -4,15 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In</title>
+    <link rel="stylesheet" href="../signUp/signUp.css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="../../app.js"></script>
     <script src="login.js"></script>
   </head>
   <body>
-    <div class="login-page">
-      <h2 id="login-head">Log In</h2>
+    <div class="auth-page">
+      <h2 id="auth-head">Log In</h2>
       <form
-        class="login-form"
+        class="auth-form"
         ng-controller="LoginController"
         ng-submit="submitLogin()"
       >
@@ -28,7 +30,7 @@
           required
         />
         <br />
-        <button type="submit" id="login-btn">Log In</button>
+        <button type="submit" id="auth-btn">LogIn</button>
       </form>
     </div>
   </body>

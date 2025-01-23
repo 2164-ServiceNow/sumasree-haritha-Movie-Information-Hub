@@ -39,7 +39,7 @@ app.controller("LoginController", function ($scope, $window) {
     });
 
     // Redirect to the main page (index.html)
-   $window.location.href = "../../index.html";
+    $window.location.href = "../../index.html";
   };
 });
 app.controller("SignUpController", function ($scope, $window) {
@@ -118,7 +118,7 @@ app.controller("MainController", function ($scope, $http) {
     console.log("Redirecting to signup page...");
     window.location.href = "components/signUp/signUp.html";
   };
-  
+
   $scope.loadAllMovies = function () {
     $scope.searchValue = "";
     $scope.getMovies();
