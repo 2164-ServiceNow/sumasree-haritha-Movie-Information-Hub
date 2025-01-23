@@ -1,27 +1,6 @@
-"use strict";
-
 let app = angular.module("movieApp", []);
-// 1
-// app.config(function ($routeProvider) {
-//   $routeProvider
-//     .when("/login", {
-//       templateUrl: "components/login/login.html",
-//       controller: "LoginController",
-//     })
-//     .when("/signup", {
-//       templateUrl: "components/signUp/signUp.html",
-//       controller: "SignUpController",
-//     })
-//     .when("/movies", {
-//       templateUrl: "./index.html", // Path to your main movie page
-//       controller: "MainController",
-//     })
-//     .otherwise({
-//       redirectTo: "/movies", // Default route
-//     });
-// });
 
-app.controller("AuthController", function ($scope, $window) {
+app.controller("AuthController", function ($scope, $window, $http) {
   $scope.isSignUp = true;
 
   $scope.toggleForm = function () {
@@ -29,54 +8,43 @@ app.controller("AuthController", function ($scope, $window) {
   };
 
   $scope.submitSignUp = function () {
-    console.log("User registered with:", {
+    const userData = {
       username: $scope.username,
       email: $scope.email,
       password: $scope.password,
-    });
+    };
 
-    // Redirect to login page
-    alert("Sign-up successful! Redirecting to login...");
-    $scope.toggleForm(); // Switch to login form
+    $http
+      .post("http://localhost:3001/signup", userData)
+      .then((response) => {
+        alert("Sign-up successful! Redirecting to login...");
+        console.log(userData.username);
+        $scope.toggleForm();
+      })
+      .catch((error) => {
+        alert(error.data.message || "Sign-up failed!");
+        console.log(error.data.message);
+      });
   };
 
   $scope.submitLogin = function () {
-    console.log("User logged in with:", {
+    const loginData = {
       email: $scope.email,
       password: $scope.password,
-    });
+    };
 
-    // Redirect to the main page (index.html)
-    $window.location.href = "../../index.html";
-    // $window.location.href = "#/movies"; // Redirect using route
+    $http
+      .post("http://localhost:3001/login", loginData)
+      .then((response) => {
+        alert("Login successful!");
+        $window.location.href = "/index.html";
+      })
+      .catch((error) => {
+        alert(error.data.message || "Login failed!");
+      });
   };
 });
 
-app.controller("LoginController", function ($scope, $window) {
-  $scope.submitLogin = function () {
-    console.log("User logged in with:", {
-      email: $scope.email,
-      password: $scope.password,
-    });
-
-    // Redirect to the main page (index.html)
-    $window.location.href = "../../index.html";
-    // $window.location.href = "#/movies"; // Redirect using route
-  };
-});
-app.controller("SignUpController", function ($scope, $window) {
-  $scope.submitSignUp = function () {
-    console.log("User registered with:", {
-      username: $scope.username,
-      email: $scope.email,
-      password: $scope.password,
-    });
-
-    // Redirect to login page
-    $window.location.href = "../../components/login/login.html";
-    // $window.location.href = "#/login"; // Redirect using route
-  };
-});
 app.controller("MainController", function ($scope, $http, $window) {
   $scope.movies = [];
   $scope.watchlist = [];
@@ -113,71 +81,6 @@ app.controller("MainController", function ($scope, $http, $window) {
         });
     });
   };
-  // only name of the movie
-  // $scope.search = function () {
-  //   if ($scope.searchValue.trim() !== "") {
-  //     $http
-  //       .get(
-  //         `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
-  //       )
-  //       .then(function (response) {
-  //         if (response.data && response.data.Search) {
-  //           $scope.movies = response.data.Search;
-  //           $scope.showingWatchlist = false;
-  //         } else {
-  //           $scope.movies = [];
-  //           alert("No movies found for search term.");
-  //         }
-  //       })
-  //       .catch(function (error) {
-  //         console.error("Error searching movies:", error);
-  //       });
-  //   } else {
-  //     $scope.getMovies();
-  //   }
-  // };
-  // year and movie
-  // $scope.search = function () {
-  //   $scope.errorMessage = ""; // Reset error message before each search
-  //   if ($scope.searchValue.trim() !== "") {
-  //     if (!isNaN($scope.searchValue)) {
-  //       // Input is a year, filter movies locally
-  //       const year = $scope.searchValue;
-  //       $scope.filteredMovies = $scope.movies.filter(
-  //         (movie) => movie.Year === year
-  //       );
-
-  //       if ($scope.filteredMovies.length === 0) {
-  //         // alert("No movies found for the entered year.");
-  //         $scope.errorMessage = "No movies found for the entered year.";
-  //         $window.location.href = "../../index.html";
-  //       }
-  //     } else {
-  //       // Input is a name, fetch movies from API
-  //       $http
-  //         .get(
-  //           `https://www.omdbapi.com/?s=${$scope.searchValue}&apikey=${apiKey}`
-  //         )
-  //         .then(function (response) {
-  //           if (response.data && response.data.Search) {
-  //             $scope.movies = response.data.Search;
-  //             $scope.filteredMovies = $scope.movies;
-  //           } else {
-  //             $scope.movies = [];
-  //             // alert("No movies found for the search term.");
-  //             $scope.errorMessage = "No movies found for the search term.";
-  //             $window.location.href = "../../index.html";
-  //           }
-  //         })
-  //         .catch(function (error) {
-  //           console.error("Error searching movies:", error);
-  //         });
-  //     }
-  //   } else {
-  //     alert("Please enter a search term!");
-  //   }
-  // };
-
   // year ,movie name with error message
   $scope.search = function () {
     $scope.errorMessage = ""; // Reset error message before each search
