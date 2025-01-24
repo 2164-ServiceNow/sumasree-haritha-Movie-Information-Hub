@@ -30,7 +30,7 @@ app.controller("MainController", function ($scope, $http) {
           }
         })
         .catch(function (error) {
-          console.error(`Error fetching movies for query: ${query}`, error);
+          console.error(`Error fetching movies for query: ${query}, error`);
         });
     });
   };

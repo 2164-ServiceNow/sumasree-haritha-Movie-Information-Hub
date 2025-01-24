@@ -40,7 +40,7 @@ app.post("/signup", (req, res) => {
   };
   users.push(newUser);
   console.log(
-    `Sign-up successful: User ${username} with email ${email} registered.`
+    `Sign-up successful: User SignUp with email ${email} registered.`
   );
   res.status(200).send({ message: "User registered successfully!" });
 });
@@ -61,8 +61,14 @@ app.post("/login", (req, res) => {
   }
 
   const { password: _, ...userDetails } = user;
-  console.log(`Login successful: User ${user.username} with email ${email}.`);
+  console.log(`Login successful: User Login with email ${email}.`);
   res.status(200).send({ message: "Login successful!", user: userDetails });
+});
+
+// Get all users route
+app.get("/users", (req, res) => {
+  const usersWithoutPasswords = users.map(({ password, ...user }) => user); // Exclude passwords
+  res.status(200).send(usersWithoutPasswords);
 });
 
 app.listen(port, () => {

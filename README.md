@@ -16,7 +16,7 @@ A Single Page Application (SPA) using AngularJS that allows users to search for 
 
 - As a user, I want to register or create an account, so I can securely store and manage my personalized watchlist.
 - As a user, I want to search for movies by title so I can find specific films easily.
-- As a user, I want to view detailed information (poster, plot, actors, and ratings) about a movie to learn more about it.
+- As a user, I want to view detailed information (poster, year and IMBD ID) about a movie to learn more about it.
 - As a user, I want to add movies to a watchlist so I can keep track of films I plan to watch.
 - As a user, I want to remove movies from my watchlist to manage my list effectively.
 - As a user, I want to view my watchlist in a dedicated section to easily access saved movies.
