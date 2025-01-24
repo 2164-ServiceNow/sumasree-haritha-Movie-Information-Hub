@@ -25,11 +25,20 @@
         </div>
       </div>
       <div class="navbar-right">
-        <button ng-click="goToSignUp()" class="btn-signin">Sign Up</button>
+        <a href="/signup" class="btn-signin">Sign Up</a>
 
-        <button ng-click="goToLogin()" class="btn-signin">Log In</button>
+        <a href="/login" class="btn-signin">Log In</a>
       </div>
     </nav>
+    <div class="movie-details" ng-if="selectedMovie">
+      <button class="close-btn" ng-click="closeDetails()">✖</button>
+      <img ng-src="{{selectedMovie.Poster}}" alt="{{selectedMovie.Title}}" />
+      <h2>{{selectedMovie.Title}}</h2>
+      <p>Year: {{selectedMovie.Year}}</p>
+      <p>Type: {{selectedMovie.Type}}</p>
+      <p>IMDB ID: {{selectedMovie.imdbID}}</p>
+    </div>
+
 
     <!-- Content Section -->
     <div class="content">
@@ -69,6 +78,6 @@
       </div>
     </div>
     <script src="/sumasree-haritha-Movie-Information-Hub/app/app.js"></script>
-    <script src="../controller/mainController.js"></script>
+    <script src="/sumasree-haritha-Movie-Information-Hub/app/controller/mainController.js"></script>
   </body>
 </html>
