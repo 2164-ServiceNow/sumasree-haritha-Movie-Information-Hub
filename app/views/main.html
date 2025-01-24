@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="movieApp">
+<html lang="en" ng-app="MovieApp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie App</title>
-    <link rel="stylesheet" href="/sumasree-haritha-Movie-Information-Hub/app/css/main.css" />
+    <link rel="stylesheet" href="main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
   </head>
@@ -25,11 +25,27 @@
         </div>
       </div>
       <div class="navbar-right">
-        <a href="/signup" class="btn-signin">Sign Up</a>
+        <a ng-href="/signup" class="btn-signin" style="text-decoration: none"
+          >Sign Up</a
+        >
 
-        <a href="/login" class="btn-signin">Log In</a>
+        <a ng-href="/login" class="btn-signin" style="text-decoration: none"
+          >Log In</a
+        >
       </div>
     </nav>
+    <!-- Error Message -->
+    <div ng-if="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <!-- watchlist Message -->
+
+    <div
+      class="empty-watchlist-message"
+      ng-if="showingWatchlist && watchlist.length === 0"
+    >
+      <p>Your watchlist is currently empty. Add some movies to get started!</p>
+    </div>
     <div class="movie-details" ng-if="selectedMovie">
       <button class="close-btn" ng-click="closeDetails()">✖</button>
       <img ng-src="{{selectedMovie.Poster}}" alt="{{selectedMovie.Title}}" />
@@ -39,10 +55,8 @@
       <p>IMDB ID: {{selectedMovie.imdbID}}</p>
     </div>
 
-
     <!-- Content Section -->
     <div class="content">
-
       <!-- Movie Grid -->
       <div class="movie-grid" ng-if="!selectedMovie">
         <div
@@ -77,7 +91,8 @@
         </div>
       </div>
     </div>
-    <script src="/sumasree-haritha-Movie-Information-Hub/app/app.js"></script>
-    <script src="/sumasree-haritha-Movie-Information-Hub/app/controller/mainController.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/controller/mainController.js"></script>
+    <script src="/app/controller/authController.js"></script>
   </body>
 </html>

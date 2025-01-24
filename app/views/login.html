@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="movieApp">
+<html lang="en" ng-app="MovieApp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In</title>
-    <link rel="stylesheet" href="/sumasree-haritha-Movie-Information-Hub/app/css/signup.css"/>
+    <link rel="stylesheet" href="/app/views/signup.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="../../app.js"></script>
@@ -15,7 +15,7 @@
       <h2 id="auth-head">Log In</h2>
       <form
         class="auth-form"
-        ng-controller="LoginController"
+        ng-controller="AuthController"
         ng-submit="submitLogin()"
       >
         <label for="email">Email:</label>
