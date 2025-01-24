@@ -1,0 +1,167 @@
+/* General Styles for the Authentication Page */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("/app/asset/movie-background-collage.jpg") no-repeat center
+    center fixed; /* Replace with your image path */
+  background-size: cover;
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Add a semi-transparent overlay to darken the background */
+}
+
+.auth-form {
+  background: #fff; /* Form background color */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center; /* Center-align content */
+}
+
+#auth-head {
+  font-size: 24px;
+  font-weight: bold;
+  color: #eee7e7;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+#auth-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eec37d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#auth-btn:hover {
+  background-color: #85560a;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #f39c12;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.toggle-btn {
+  display: inline-block;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.toggle-btn:hover {
+  text-decoration: underline;
+}
+/* Centering the auth page */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  position: relative;
+  color: white;
+}
+
+/* Styling the auth form */
+.auth-form {
+  background: #e6e6fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+/* Center the button */
+.toggle-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #8211ce;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.toggle-btn:hover {
+  text-decoration: none;
+}
+
+/* Responsive font sizing */
+#auth-head {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#auth-btn {
+  background-color: #8211ce;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2%;
+}
+
+#auth-btn:hover {
+  background-color: #540e83;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  font-size: 1rem;
+}
+
+/* Fix button positioning and alignment */
+.toggle-btn {
+  display: inline-block;
+  margin: 10px 0;
+  text-align: center;
+}
